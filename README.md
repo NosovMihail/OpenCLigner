@@ -16,7 +16,9 @@
 
 ### Installation
 
-Download `opencligner` and all available `.cl` cores. Place them in the same folder. To run the programm you should have OpenCL support on your system. It can be obtained by executing:
+- Download **Release** OR `opencligner` and all available `.cl` cores
+- Place them in the same folder
+- To run the programm you should have OpenCL support on your system. It can be obtained by executing:
 ```bash
 sudo apt install ocl-icd-opencl-dev
 ```
@@ -60,16 +62,59 @@ docker run --rm -v $(pwd):/app opencligner -m global -o /app/output.fasta /app/s
 ```
 This builds the project inside an Ubuntu container with OpenCL headers and compilers installed.
 
+## Possible Improvements and Future Work
+
+- **Multiple Sequence Alignment (MSA)**  
+  Extend support from pairwise alignment to multiple sequences using progressive or iterative methods.
+
+- **Affine Gap Penalties**  
+  Implement support for affine gap scoring (gap opening and gap extension penalties) to improve biological accuracy.
+
+- **Performance Optimization**  
+  - Explore tile-based or diagonal parallelism in OpenCL for better scalability  
+  - Add device-specific optimizations (e.g., vectorization on GPUs)
+
+- **FASTA Parsing Enhancements**  
+  Improve support for multiline sequences and unusual formatting in FASTA headers.
+
+- **Alignment Scoring Report**  
+  Output alignment score, identity percentage, and mismatch/gap statistics.
+
+- **Visual Output Format**  
+  Export alignment result in:
+  - Clustal format
+  - SAM/BAM format for integration with bioinformatics tools
+  - Visual HTML or SVG-based alignment view
+
+- **Support for Substitution Matrices**  
+  Allow the use of scoring matrices like BLOSUM or PAM for protein sequences.
+
+- **Validation**  
+  Add benchmarks comparing results with established tools (e.g., EMBOSS, NCBI BLAST).
+
+- **Cross-Platform GUI**  
+  Optionally provide a simple desktop interface for users unfamiliar with the command line.
+
+- **Library API**  
+  Expose alignment as a C++ library or C-compatible API for embedding in other software.
+
+- **OpenCL Device Selection**  
+  Allow users to choose which OpenCL platform and device to use for execution.
+
+- **Parallel Input Processing**  
+  Batch processing of multiple FASTA files with parallel alignment execution.
+
+
 ## Files
-- main.cpp: Main entry point
+- `main.cpp`: Main entry point
 
-- needleman_wunsch_wavefront.cl: OpenCL kernel for global alignment
+- `needleman_wunsch_wavefront.cl`: OpenCL kernel for global alignment
 
-- smith_waterman_wavefront.cl: OpenCL kernel for local alignment
+- `smith_waterman_wavefront.cl`: OpenCL kernel for local alignment
 
-- Dockerfile: Docker build configuration
+- `Dockerfile`: Docker build configuration
 
-- LICENSE.txt: License information
+- `LICENSE.txt`: License information
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.txt](https://github.com/NosovMihail/OpenCLigner/blob/master/LICENSE.txt) file for details.
